@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead" style="background-image:url('/static/img/post-bg.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <div class="post-heading">
+                    <h1>Create New Article</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <form action="" method="POST">{% csrf_token %} {{ form.as_p }} <input type="submit" value="Save"></form>
+    </div>
+</div>
+{% endblock content %}

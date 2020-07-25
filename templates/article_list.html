@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} Articles {% endblock title %}
+
+{% block content %}
+<header class="masthead" style="background-image:url('/static/img/home-bg.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+
+            {% for article in object_list %}
+
+            <div class="card" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                <a href="{% url 'article_detail' article.pk %}">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <h6 class="card-title">{{ article.author }}</h6>
+                    <h6 class="card-title">{{ article.date_format }}</h6>
+                </a>
+                  <p class="card-text">{{ article.body_into }} <br><span>{{ article.date_format }}</span></p>
+                  <a href="{% url 'article_edit' article.pk %}" class="btn btn-primary">Edit</a>
+                  <a href="{% url 'article_delete' article.pk %}" class="btn btn-primary">Delete</a>
+                  <div class ="card-footer">
+                      {% for comment in article.comments.all %}
+                      <p> <span class="font-wight-bold"> {{ comment.author }}&middot; {{ comment.date }}</span>
+                        {{ comment }}</p>
+                    {% endfor %}
+
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+    </header>
+    <a href="{% url 'article_new' %}" class="btn btn-primary">Create</a>
+
+{% endblock content %}

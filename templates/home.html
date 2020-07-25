@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+<header class="masthead" style="background-image:url('/static/img/home-bg.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <div class="site-heading">
+                    {% if user.is_authenticated %}
+                    <h1> HI {{user.username}}!</h1><span class="subheading">Welcome Once Again</span></div>
+                    {% else %}
+                    <h1> Please Log in!</h1><span class="subheading">To get the full Acess</span></div>
+                    {% endif %}
+
+            <!-- {% for article in object_list %} -->
+            <!-- {% endfor %} -->
+            
+        </div>
+    </div>
+</div>
+</header>
+
+<div class="row">
+
+    {% for article in object_list %}
+
+    <div class="card" style="width: 18rem;">
+        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+        <div class="card-body">
+        <a href="{% url 'article_detail' article.pk %}">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <h6 class="card-title">{{ article.author }}</h6>
+            <h6 class="card-title">{{ article.date_format }}</h6>
+        </a>
+          <p class="card-text">{{ article.body_into }} <br><span>{{ article.date_format }}</span></p>
+          <a href="{% url 'article_edit' article.pk %}" class="btn btn-primary">Edit</a>
+          <a href="{% url 'article_delete' article.pk %}" class="btn btn-primary">Delete</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% for article in latest_articles %}
+    <h2>{{ articles.title }}</h2>
+    {% endfor %}
+{% endblock content %}
