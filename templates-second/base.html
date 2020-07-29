@@ -103,8 +103,8 @@
                         {% endif %}
                         </li>
                         <li><a href="style-guide.html" title="">Styles</a></li>
-                        <li><a href="about.html" title="">About</a></li>
-                        <li><a href="contact.html" title="">Contact</a></li>
+                        <li><a href="{% url 'about' %}" title="">About</a></li>
+                        <li><a href="{% url 'contact' %}" title="">Contact</a></li>
                         {% if user.is_authenticated %}
                         <li><a class="has-children" href="">{{ user.username }}</a>
                             <ul class="sub-menu">
