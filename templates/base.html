@@ -18,7 +18,7 @@
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link {% if request.path != '/' %} text-dark {% endif %}" href="{% url 'home' %}">Home</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link {% if request.path != '/' %} text-dark {% endif %}" href="{% url 'article_list' %}">Articles</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link {% if request.path != '/' %} text-dark {% endif %}" href="{% url 'article_new' %}"">New Post</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link {% if request.path != '/' %} text-dark {% endif %}" href="{% url 'article_new' %}">New Post</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link {% if request.path != '/' %} text-dark {% endif %}" href="">Contact</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item" role="presentation"><a class="nav-link {% if request.path != '/' %} text-dark {% endif %}" href="">{{ user.username }}</a></li>

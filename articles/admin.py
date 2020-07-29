@@ -11,12 +11,14 @@ class ComentInline(admin.TabularInline):
 
 class ArticleAdmin(admin.ModelAdmin):
     # Show the comments inside every article
-    inlines = [ComentInline,]
+    inlines = [ComentInline]
 
 # class CustomComment(Comment):
 #     model = Comment
 #     list_display = ['date', 'comment']
 
+
 # Register your models here.
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment)
+# admin.site.register(Replay)

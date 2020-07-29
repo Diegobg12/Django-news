@@ -11,6 +11,7 @@ class Article(models.Model):
     title = models.CharField(max_length = 255)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add = True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     author = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -43,4 +44,24 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment
     def get_absolute_url(self):
-        return reverse('article_list')    
+        return reverse('article_list')
+    def date_format(self):
+        return self.date.strftime('%b %e %Y & %H ')
+
+
+# class Replay(models.Model):
+#     coment = models.ForeignKey(Comment, 
+#     on_delete = models.CASCADE,
+#     related_name = 'replies')
+#     author = models.ForeignKey(
+#         get_user_model(),
+#         on_delete = models.CASCADE,
+#         # Query the comments related to each author
+#     )
+#     date = models.DateTimeField(auto_now_add = True)
+#     reply = models.CharField(max_length = 140)    
+#     def __str__(self):
+#         return self.reply
+#     def get_absolute_url(self):
+#         return reverse('article_list')    
+

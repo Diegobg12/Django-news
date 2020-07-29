@@ -9,6 +9,11 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['latest_articles'] = Article.objects.filter(title__contains = "2")
+        allPublished = Article.objects.order_by('date').all()
+        context['lastPost'] = allPublished[0]
+        context['frontPosts'] = allPublished[1:3]
+        context['middle'] = allPublished[4]
+        context['restPost'] = allPublished[5:]
+        
         return context
     
