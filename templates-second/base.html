@@ -71,13 +71,15 @@
 
                 <div class="header__search">
 
-                    <form role="search" method="get" class="header__search-form" action="#">
+                    <form role="search" method="GET" class="header__search-form" action="{% url 'search_results' %}">
                         <label>
                             <span class="hide-content">Search for:</span>
-                            <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
+                            <input type="search" class="search-field" placeholder="Type Keywords" value="" name="search" title="Search for:" autocomplete="off">
                         </label>
-                        <input type="submit" class="search-submit" value="Search">
+                        <input type="submit" class="search-submit" value="Search" >
                     </form>
+
+                    
         
                     <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
 
@@ -106,9 +108,10 @@
                         <li><a href="{% url 'about' %}" title="">About</a></li>
                         <li><a href="{% url 'contact' %}" title="">Contact</a></li>
                         {% if user.is_authenticated %}
-                        <li><a class="has-children" href="">{{ user.username }}</a>
+                        <li class="has-children"><a href="">{{ user.username }}</a>
                             <ul class="sub-menu">
-                            <li><a href="{% url 'logout' %}">Log Out</a></li>
+                                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                                <li><a href="{% url 'edituser' user.pk %}">Edit Profile</a></li>
                             </ul>
                         </li>
                         <li>

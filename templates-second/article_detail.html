@@ -15,8 +15,7 @@
                     <li class="date">{{  article.date_format }}</li>
                     <li class="cat">
                         In
-                        <a href="#0">Lifestyle</a>
-                        <a href="#0">Travel</a>
+                        <a href="{% url 'article_category' article.category.pk %}">{{ article.category.title }}</a>
                     </li>
                 </ul>
 

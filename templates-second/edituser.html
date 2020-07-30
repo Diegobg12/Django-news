@@ -1,0 +1,38 @@
+{% extends 'base-new.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} log In {% endblock title %}
+
+{% block content %}
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+                    Edit user profile
+                </h1>
+            </div> <!-- end s-content__header -->
+
+            <div class="s-content__media col-full ">
+                <div class="s-content__post-thumb">
+                    <hr>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button class ="btn btn-success" type="submit">Edit Up</button>
+                    </form>
+                    <hr>
+                </div>
+            </div> <!-- end s-content__media -->
+
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+    {% endblock %}

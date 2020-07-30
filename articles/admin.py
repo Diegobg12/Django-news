@@ -21,4 +21,5 @@ class ArticleAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment)
+admin.site.register(Category)
 # admin.site.register(Replay)

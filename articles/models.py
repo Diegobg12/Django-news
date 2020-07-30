@@ -6,12 +6,30 @@ from datetime import datetime
 
 # Create your models here.
 
+class Category(models.Model):
+    title = models.CharField(max_length = 255)
+    description = models.TextField()
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+    )
+    
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+ 
 
 class Article(models.Model):
     title = models.CharField(max_length = 255)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add = True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE ,null=True, blank=True)
+    # tags = models.ManyToManyField(Tag)
     author = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -65,3 +83,16 @@ class Comment(models.Model):
 #     def get_absolute_url(self):
 #         return reverse('article_list')    
 
+# class Tag(models.Model):
+#     title = models.CharField(max_length=250)
+#     slug = models.SlugField(max_length=200, unique=True)
+#     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+#     def __str__(self):
+#         return self.title
+
+#     def get_absolute_url(self):
+#         return reverse("posts:tag_index", kwargs={"slug": self.slug})
+
+#     class Meta:
+#         ordering = ["-timestamp"]
