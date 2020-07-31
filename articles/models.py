@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.conf import settings
 from datetime import datetime
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -13,23 +14,25 @@ class Category(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
     )
-    
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
         ordering = ['title']
-
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('category_detail',args=([str(self.id)]))
  
 
 class Article(models.Model):
     title = models.CharField(max_length = 255)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add = True)
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE ,null=True, blank=True)
+    image = models.ImageField(upload_to='images/', null=True, default="/images/default-image.jpg")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE ,null=True, default='2')
     # tags = models.ManyToManyField(Tag)
+    tags = TaggableManager()
     author = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,

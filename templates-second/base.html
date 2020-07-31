@@ -94,15 +94,14 @@
 
                     <ul class="header__nav">
                         <li class="current"><a href="{% url 'home' %}" title="">Home</a></li>
-                        {% if user.is_authenticated %}
                         <li class="has-children">
                             <a href="{% url 'article_list' %}" title="">Blog</a>
                             <ul class="sub-menu">
-                                <li><a href="{% url 'article_new' %}">New Post</a></li>
+                                {% for cat in Categories%}
+                                    <li><a href="{% url 'article_category' cat.pk %}">{{ cat.title }}</a></li>
+
+                                {% endfor %}
                             </ul>
-                        {% else %}
-                        <li><a href="style-guide.html" title="">Blog</a></li>
-                        {% endif %}
                         </li>
                         <li><a href="style-guide.html" title="">Styles</a></li>
                         <li><a href="{% url 'about' %}" title="">About</a></li>
@@ -110,6 +109,7 @@
                         {% if user.is_authenticated %}
                         <li class="has-children"><a href="">{{ user.username }}</a>
                             <ul class="sub-menu">
+                                <li><a href="{% url 'article_new' %}">New Post</a></li>
                                 <li><a href="{% url 'logout' %}">Log Out</a></li>
                                 <li><a href="{% url 'edituser' user.pk %}">Edit Profile</a></li>
                             </ul>
@@ -139,6 +139,78 @@
 
 
         {% endblock content %}
+    
+         <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+        {{ testme }}
+        <div class="row top">
+
+            <div class="col-eight md-six tab-full popular">
+                <h3>Last Posts</h3>
+
+                <div class="block-1-2 block-m-full popular__posts">
+                    {% for article in last_articles %}
+                    <article class="col-block popular__post">
+                        <a href="{% url 'article_list' %}" class="popular__thumb">
+                            <img src="{{ article.image.url }}" alt="">
+                        </a>
+                        <h5><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h5>
+                        <section class="popular__meta">
+                                <span class="popular__author"><span>By</span> <a href="#0"> {{ article.author }}</a></span>
+                            <span class="popular__date"><span>on</span> <time datetime="2017-12-19">{{ article.date_format }}</time></span>
+                        </section>
+                    </article>
+                    {% endfor %}
+                </div> <!-- end popular_posts -->
+            </div> <!-- end popular -->
+            
+            <div class="col-four md-six tab-full about">
+                <h3>About Philosophy</h3>
+
+                <p>
+                Donec sollicitudin molestie malesuada. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
+                </p>
+
+                <ul class="about__social">
+                    <li>
+                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    </li>
+                </ul> <!-- end header__social -->
+            </div> <!-- end about -->
+
+        </div> <!-- end row -->
+
+        <div class="row bottom tags-wrap">
+            <div class="col-full tags">
+                <h3>Tags</h3>
+
+                <div class="tagcloud">
+                    <a href="#0">Salad</a>
+                    <a href="#0">Recipe</a>
+                    <a href="#0">Places</a>
+                    <a href="#0">Tips</a>
+                    <a href="#0">Friends</a>
+                    <a href="#0">Travel</a>
+                    <a href="#0">Exercise</a>
+                    <a href="#0">Reading</a>
+                    <a href="#0">Running</a>
+                    <a href="#0">Self-Help</a>
+                    <a href="#0">Vacation</a>
+                </div> <!-- end tagcloud -->
+            </div> <!-- end tags -->
+        </div> <!-- end tags-wrap -->
+
+    </section> <!-- end s-extra -->
     
         <!-- s-footer
     ================================================== -->

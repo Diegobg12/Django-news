@@ -25,9 +25,8 @@
                 <article class="masonry__brick entry format-standard" data-aos="fade-up">
                         
                     <div class="entry__thumb">
-                        <a href="single-standard.html" class="entry__thumb-link">
-                            <img src="images/thumbs/masonry/lamp-400.jpg" 
-                                 srcset="images/thumbs/masonry/lamp-400.jpg 1x, images/thumbs/masonry/lamp-800.jpg 2x" alt="">
+                        <a href="{{ post.get_absolute_url }}" class="entry__thumb-link">
+                            <img src="{{ post.image.url }}" alt="">
                         </a>
                     </div>
     
@@ -35,14 +34,14 @@
                         <div class="entry__header">
                             
                             <div class="entry__date">
-                                <a href="single-standard.html">{{ post.dat_format }}</a>
+                                <a href="single-standard.html">{{ post.date_format }}</a>
                             </div>
                             <h1 class="entry__title"><a href="single-standard.html">{{ post.title }}</a></h1>
                             
                         </div>
                         <div class="entry__excerpt">
                             <p>
-                                {{ post.body_into }}
+                                {{ post.body_into|safe }}
                             </p>
                         </div>
                         <div class="entry__meta">

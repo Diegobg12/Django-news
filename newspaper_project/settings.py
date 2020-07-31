@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # Locals
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
-    'articles.apps.ArticlesConfig'
+    'articles.apps.ArticlesConfig',
+    'taggit'
 ]
 
 TIME_ZONE = 'America/Vancouver'

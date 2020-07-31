@@ -213,6 +213,10 @@ p.lead {
    color: #000000;
 }
 
+.resume p.lead{
+   font-size: 1.5rem!important;
+   color: gray;
+}
 @media only screen and (max-width:800px) {
    p.lead {
       font-size: 1.8rem;
