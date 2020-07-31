@@ -3,7 +3,8 @@ from django.views.generic import TemplateView, ListView, DetailView
 from articles.models import *
 from django.shortcuts import get_object_or_404
 from itertools import chain
-
+from taggit.models import Tag
+from users.models import *
 
 
 # Create your views here.
@@ -41,8 +42,11 @@ class SearchResultsView(ListView):
           postresult = Article.objects.filter(body__contains=query)
           title = Article.objects.filter(title__contains=query)
           category_id = list(Category.objects.filter(title__contains=query))
-          category = Article.objects.filter(category=category_id[0])
-          combined_results = list(chain(title, postresult, category))
+          if len(category_id)>0:
+              category = Article.objects.filter(category=category_id[0])
+              combined_results = list(chain(title, postresult,category))
+          else:
+              combined_results = list(chain(title, postresult))
         #   combined_results = title | postresult
           result = combined_results 
        else:
@@ -69,3 +73,37 @@ class CategoryView(ListView):
         context['category'] = self.category
         context['post_list'] = post_list
         return context
+
+
+
+# class TagView(ListView):
+#     model = Article
+#     template_name = 'tag-view.html'
+# # Get the category id from the url
+#     def get_queryset(self):
+#         self.tag = get_object_or_404(Tag, pk=self.kwargs['pk'])
+#         return Article.objects.filter(tagged_items__contains=self.tag)
+# # Add the category in our dicctionary
+#     def get_context_data(self, **kwargs):
+#         context = super(TagView, self).get_context_data(**kwargs)
+#         post_list = Article.objects.filter(tagged_items__contains=self.tag)
+#         context['tag'] = self.tag
+#         context['post_list'] = post_list
+#         return context
+
+
+class AuthorView(ListView):
+    model = Article
+    template_name = 'user-view.html'
+# Get the category id from the url
+    def get_queryset(self):
+        self.author = get_object_or_404(CustomUser, pk=self.kwargs['pk'])
+        return Article.objects.filter(author=self.author)
+# Add the category in our dicctionary
+    def get_context_data(self, **kwargs):
+        context = super(AuthorView, self).get_context_data(**kwargs)
+        post_list = Article.objects.filter(author=self.author)
+        context['author'] = self.author
+        context['post_list'] = post_list
+        return context
+

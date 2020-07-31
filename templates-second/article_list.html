@@ -1,6 +1,6 @@
 {% extends 'base-new.html' %}
 
-{% block title %} {{ category.title }} {% endblock %}
+{% block title %} BLOG {% endblock %}
 
 {% block content %}
 
@@ -11,9 +11,8 @@
 
         <div class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
-                <h1>Category: {{ category.title }}</h1>
+                <h1>BLOG</h1>
 
-                <p class="lead">{{ category.description }}</p>
             </div>
         </div>
         
@@ -21,7 +20,7 @@
             <div class="masonry">
 
                 <div class="grid-sizer"></div>
-                {% for post in post_list %}
+                {% for post in object_list %}
                 <article class="masonry__brick entry format-standard" data-aos="fade-up">
                         
                     <div class="entry__thumb">
@@ -37,7 +36,7 @@
                                 <a href="{{ post.get_absolute_url }}">{{ post.date_format }}</a>
                                 <a href="{% url 'article_author' post.author.pk %}">By {{ post.author }}</a>
                             </div>
-                            <h1 class="entry__title"><a href="{{ post.image.url }}">{{ post.title }}</a></h1>
+                            <h1 class="entry__title"><a href="single-standard.html">{{ post.title }}</a></h1>
                             
                         </div>
                         <div class="entry__excerpt">
@@ -52,6 +51,8 @@
                                 {% endfor %}
                             </span>
                         </div>
+
+                        
                     </div>
     
                 </article> <!-- end article -->

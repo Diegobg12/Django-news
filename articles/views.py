@@ -12,11 +12,14 @@ from .forms import *
 
 class ArticleListView(ListView):
     model = Article
-    template_name = 'article_list.html'  
+    template_name = 'article_list.html' 
+
 
 class ArticleDetailLView(DetailView):
     model = Article
     template_name = 'article_detail.html'
+    
+
 
 class ArticleUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Article

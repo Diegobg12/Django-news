@@ -1,14 +1,13 @@
 {% extends 'base-new.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}  Seach {% endblock title %}
+{% block title %} Search Results {% endblock title %}
 
 {% block content %}
 
 
 
 <section class="s-extra">
-   {{ testme }}
    <div class="row top">
 
        <div class="col-eight md-six tab-full popular search">
@@ -29,7 +28,6 @@
                </article>
                {% empty %}
                   <h1>No results for "{{ search_value }}" Please try again</h1>
-                  
                {% endfor %}
            </div> <!-- end popular_posts -->
        </div> <!-- end popular -->
