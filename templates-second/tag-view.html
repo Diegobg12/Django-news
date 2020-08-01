@@ -33,20 +33,26 @@
                         <div class="entry__header">
                             
                             <div class="entry__date">
-                                <a href="single-standard.html">{{ post.date_format }}</a>
+                                <a href="{{ post.get_absolute_url }}">{{ post.date_format }}</a>
+                                <a href="{% url 'article_author' post.author.pk %}">by {{ post.author }}</a>
+
                             </div>
-                            <h1 class="entry__title"><a href="single-standard.html">{{ post.title }}</a></h1>
+                            <h1 class="entry__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
                             
                         </div>
                         <div class="entry__excerpt">
+                            <div class="resume">
+
                             <p>
                                 {{ post.body_into|safe }}
                             </p>
+                            </div>
                         </div>
                         <div class="entry__meta">
                             <span class="entry__meta-links">
-                                <a href="category.html">Design</a> 
-                                <a href="category.html">Photography</a>
+                                {% for tag in post.tags.all %}
+                                <a href="{% url 'tag' tag.pk %}">{{tag}}</a> 
+                                {% endfor %}
                             </span>
                         </div>
                     </div>

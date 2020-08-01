@@ -7,6 +7,7 @@ from taggit.models import Tag
 from users.models import *
 
 
+
 # Create your views here.
 
 class HomePageView(TemplateView):
@@ -76,20 +77,20 @@ class CategoryView(ListView):
 
 
 
-# class TagView(ListView):
-#     model = Article
-#     template_name = 'tag-view.html'
-# # Get the category id from the url
-#     def get_queryset(self):
-#         self.tag = get_object_or_404(Tag, pk=self.kwargs['pk'])
-#         return Article.objects.filter(tagged_items__contains=self.tag)
-# # Add the category in our dicctionary
-#     def get_context_data(self, **kwargs):
-#         context = super(TagView, self).get_context_data(**kwargs)
-#         post_list = Article.objects.filter(tagged_items__contains=self.tag)
-#         context['tag'] = self.tag
-#         context['post_list'] = post_list
-#         return context
+class TagView(ListView):
+    model = Article
+    template_name = 'tag-view.html'
+# Get the category id from the url
+    def get_queryset(self):
+        self.tag = get_object_or_404(Tag, pk=self.kwargs['pk'])
+        return Article.objects.filter(tags=self.tag)
+# Add the category in our dicctionary
+    def get_context_data(self, **kwargs):
+        context = super(TagView, self).get_context_data(**kwargs)
+        post_list = Article.objects.filter(tags=self.tag)
+        context['tag'] = self.tag
+        context['post_list'] = post_list
+        return context
 
 
 class AuthorView(ListView):

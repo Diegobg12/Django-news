@@ -49,7 +49,7 @@
                     <span>Post Tags</span>
                     <span class="s-content__tag-list">
                         {% for tag in article.tags.all %}
-                        <a href="">{{tag}}</a>
+                        <a href="{% url 'tag' tag.pk %}">{{tag}}</a>
                         {% endfor %}
                     </span>
                 </p> <!-- end s-content__tags -->
@@ -59,7 +59,7 @@
                 
                     <div class="s-content__author-about">
                         <h4 class="s-content__author-name">
-                            <a href="#0">{{ article.author }}</a>
+                            <a href="{% url 'AuthorView' article.author.pk %}">{{ article.author }}</a>
                         </h4>
                     
                         <p>{{ article.author.AboutYou }}
