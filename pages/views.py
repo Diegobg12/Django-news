@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from itertools import chain
 from taggit.models import Tag
 from users.models import *
+from django.template import RequestContext
 
 
 
@@ -107,4 +108,12 @@ class AuthorView(ListView):
         context['author'] = self.author
         context['post_list'] = post_list
         return context
+
+
+def not_found_view(request, *args, **argv):
+    response = render('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
 

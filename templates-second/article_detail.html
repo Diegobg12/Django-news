@@ -14,7 +14,6 @@
                 <ul class="s-content__header-meta">
                     <li class="date">{{  article.date_format }}</li>
                     <li class="cat">
-                        
                         <a href="{% url 'article_category' article.category.pk %}">{{ article.category.title }}</a>
                     </li>
                 </ul>
@@ -35,7 +34,8 @@
     
             <div class="s-content__media col-full">
                 <div class="s-content__post-thumb">
-                    <img src="{{ article.image.url }}"  alt="" >
+                    <img src="{{ article.image.url }}"  alt="sdfd" >
+                    <p>Photo by <a href="https://unsplash.com/{{ article.image_by }}"></a>{{ article.image_by }}</p>
                 </div>
             </div> <!-- end s-content__media -->
 
@@ -59,11 +59,10 @@
                 
                     <div class="s-content__author-about">
                         <h4 class="s-content__author-name">
-                            <a href="{% url 'AuthorView' article.author.pk %}">{{ article.author }}</a>
+                            <a href="{% url 'article_author' article.author.pk %}">{{ article.author }}</a>
                         </h4>
                     
-                        <p>{{ article.author.AboutYou }}
-                        </p>
+                        <p>{{ article.author.AboutYou }}</p>
                 
                         <ul class="s-content__author-social">
                            <!-- <li><a href="#0">Facebook</a></li>

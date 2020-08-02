@@ -30,6 +30,7 @@ class Article(models.Model):
     body = models.TextField()
     date = models.DateTimeField(auto_now_add = True)
     image = models.ImageField(upload_to='images/', null=True, default="/images/default-image.jpg")
+    image_by= models.CharField(max_length = 255, blank=True ,null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE ,null=True, default='2')
     # tags = models.ManyToManyField(Tag)
     tags = TaggableManager()

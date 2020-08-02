@@ -3,6 +3,7 @@ from .views import *
 from articles.views import *
 
 
+
 urlpatterns = [
     path('', HomePageView.as_view(), name = 'home'),
     path('about', AboutView.as_view(), name = 'about'),

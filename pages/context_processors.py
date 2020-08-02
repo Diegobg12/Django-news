@@ -7,9 +7,11 @@ def add_variable_to_context(request):
     categories = Category.objects.all()
     last_articles = Article.objects.all()[0:6]
     tags = Tag.objects.all()
+    quote = Quote.objects.last()
 
     return {
         'last_articles': last_articles,
         'Categories': categories,
-        'tags' : tags
+        'tags' : tags,
+        'quote': quote
     }
