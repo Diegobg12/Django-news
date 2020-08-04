@@ -13,3 +13,4 @@ urlpatterns = [
     path('<int:pk>/author/', AuthorView.as_view(), name = 'article_author'),
     path('<int:pk>/tag/', TagView.as_view(), name = 'tag'),
 ]
+

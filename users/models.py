@@ -6,6 +6,6 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True)
-    avatar = models.ImageField(upload_to='avatars/', null=True, default='/avatars/avatar.png')
+    avatar = models.ImageField(upload_to='profile', null=True, default='/profile/avatar.png')
     AboutYou = models.TextField(null=True, blank=True)
     

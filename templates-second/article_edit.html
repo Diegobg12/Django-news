@@ -19,8 +19,9 @@
 
             <div class="s-content__media col-full ">
                 <div class="s-content__post-thumb">
-                    <form action="" method="POST">{% csrf_token %} {{ form|crispy }} <input type="submit" value="Update"></form>
-
+                    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %} {{ form|crispy }} <input type="submit" value="Update"></form>
+                
+                    </form>
                 </div>
             </div> <!-- end s-content__media -->
 
