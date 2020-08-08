@@ -11,7 +11,12 @@
 
         <div class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
-                <h1>Author: {{ author.username }}</h1>
+                
+                <h1>{{ author.username }}</h1>
+                <div>
+                    <img style="border-radius: 100%;" width="200" height="200" class="" src="{{ author.avatar.url }}" alt="">
+                </div>
+                <p>{{ author.AboutYou }}</p>
 
             </div>
         </div>

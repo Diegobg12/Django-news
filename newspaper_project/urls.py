@@ -27,9 +27,8 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('articles/', include('articles.urls')),
-    # path('', TemplateView.as_view(template_name = 'home.html'), name = 'home')
     path('', include('pages.urls'), name = 'home')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = not_found_view
-handler500 = not_found_view
+handler404 = 'pages.views.error_404'
+handler500 = 'pages.views.error_500'

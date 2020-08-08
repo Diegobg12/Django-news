@@ -37,7 +37,7 @@
                                 <a href="{{ post.get_absolute_url }}">{{ post.date_format }}</a>
                                 <a href="{% url 'article_author' post.author.pk %}">By {{ post.author }}</a>
                             </div>
-                            <h1 class="entry__title"><a href="{{ post.image.url }}">{{ post.title }}</a></h1>
+                            <h1 class="entry__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
                             
                         </div>
                         <div class="entry__excerpt">

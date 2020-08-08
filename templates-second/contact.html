@@ -52,31 +52,23 @@
                     </div>
                 </div> <!-- end row -->
 
-                <!-- <h3>Say Hello.</h3>
+                <h3>Say Hello.</h3>
 
                 <form name="cForm" id="cForm" method="post" action="">
                     <fieldset>
 
                         <div class="form-field">
-                            <input name="cName" type="text" id="cName" class="full-width" placeholder="Your Name" value="">
-                        </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
 
-                        <div class="form-field">
-                            <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="">
-                        </div>
-
-                        <div class="form-field">
-                            <input name="cWebsite" type="text" id="cWebsite" class="full-width" placeholder="Website"  value="">
-                        </div>
-
-                        <div class="message form-field">
-                        <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message" ></textarea>
+                            </form>
                         </div>
 
                         <button type="submit" class="submit btn btn--primary full-width">Submit</button>
 
                     </fieldset>
-                </form>  -->
+                </form>  
                 <!-- end form -->
 
 

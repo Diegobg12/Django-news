@@ -103,10 +103,10 @@
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="style-guide.html" title="">Styles</a></li>
                         <li><a href="{% url 'about' %}" title="">About</a></li>
                         <li><a href="{% url 'contact' %}" title="">Contact</a></li>
                         {% if user.is_authenticated %}
+                        <!-- <li><a href="style-guide.html" title="">Styles</a></li> -->
                         <li class="has-children"><a href="">{{ user.username }}</a>
                             <ul class="sub-menu">
                                 <li><a href="{% url 'article_new' %}">New Post</a></li>

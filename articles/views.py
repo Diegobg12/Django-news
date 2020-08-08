@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from .models import *
 from django.shortcuts import get_object_or_404
 from .forms import *
+from django.views.generic.edit import FormMixin
 
 # Create your views here.
 
@@ -15,11 +16,11 @@ class ArticleListView(ListView):
     template_name = 'article_list.html' 
 
 
-class ArticleDetailLView(DetailView):
+class ArticleDetailLView(FormMixin, DetailView):
     model = Article
     template_name = 'article_detail.html'
-    
-
+    form_class = CommentForm
+ 
 
 class ArticleUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Article
@@ -54,3 +55,16 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class AddCommentView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Comment
+    fields = ['comment']
+
+    def form_valid(self, form):
+        comment=form.save(commit=False)
+        comment.article=self.kwargs.get(id)
+        comment.save()
+        super().form_valid(form)
+        
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user

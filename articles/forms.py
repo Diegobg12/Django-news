@@ -13,3 +13,10 @@ class ArticleForm(forms.ModelForm):
             'image_by',
             'tags'
         ]
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = [
+            'comment',
+        ]

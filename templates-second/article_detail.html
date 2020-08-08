@@ -1,6 +1,9 @@
 {% extends 'base-new.html' %}
 {% load static %}
 {% block content %}
+{% load crispy_forms_tags %}
+
+
 
     <!-- s-content
     ================================================== -->
@@ -20,7 +23,8 @@
 
                 {% if user.is_authenticated %}
                         <p class="s-content__tags">
-                            <span>{{ article.author }}</span>
+                            <a href="{% url 'article_author' article.author.pk %}"><span>{{ article.author }}</span></a>
+                            
                         {% if user != article.author %}
                         {% else %}
                             <span class="s-content__tag-list">
@@ -35,7 +39,7 @@
             <div class="s-content__media col-full">
                 <div class="s-content__post-thumb">
                     <img src="{{ article.image.url }}"  alt="sdfd" >
-                    <p>Photo by <a href="https://unsplash.com/{{ article.image_by }}"></a>{{ article.image_by }}</p>
+                    <p>Photo by <a href="https://unsplash.com/{{ article.image_by }}" target="_blank">{{ article.image_by }}</a></p>
                 </div>
             </div> <!-- end s-content__media -->
 
@@ -55,7 +59,7 @@
                 </p> <!-- end s-content__tags -->
                 
                 <div class="s-content__author">
-                    <img src="images/avatars/user-03.jpg" alt="">
+                    <img src="{{ article.author.avatar.url }}" alt="">
                 
                     <div class="s-content__author-about">
                         <h4 class="s-content__author-name">
@@ -92,6 +96,53 @@
             </div>
         </article>
 
+        <!-- comments
+        ================================================== -->
+        <div class="comments-wrap">
+
+            <div id="comments" class="row">
+                <div class="col-full">
+
+                    <h3 class="h2">Comments</h3>
+
+                    <!-- commentlist -->
+                    <ol class="commentlist">
+                        {% for comment in article.comments.all %}
+
+                        <li class="depth-1 comment">
+
+                            <div class="comment__avatar">
+                                <img width="50" height="50" class="avatar" src="{{ article.author.avatar.url }}" alt="">
+                            </div>
+
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                    <cite>{{ comment.author }}</cite>
+
+                                    <div class="comment__meta">
+                                        <time class="comment__time">{{ comment.date_format }}</time>
+                                        <!-- <a class="reply" href="#0">Reply</a> -->
+                                    </div>
+                                </div>
+
+                                <div class="comment__text">
+                                <p>{{ comment.comment }}</p>
+                                </div>
+
+                            </div>
+
+                    {% endfor %}
+
+                    </ol> <!-- end commentlist -->
+
+                    {% include "coments.html" %}
+
+                </div> <!-- end col-full -->
+
+            </div> <!-- end row comments -->
+        </div> 
+        <!-- end comments-wrap -->
 
     </section> <!-- s-content -->
 

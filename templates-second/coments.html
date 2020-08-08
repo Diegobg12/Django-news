@@ -1,43 +1,4 @@
-        <!-- comments
-        ================================================== -->
-        <div class="comments-wrap">
-
-            <div id="comments" class="row">
-                <div class="col-full">
-
-                    <h3 class="h2">Comments</h3>
-
-                    <!-- commentlist -->
-                    <ol class="commentlist">
-                        {% for comment in article.comments.all %}
-
-                        <li class="depth-1 comment">
-
-                            <div class="comment__avatar">
-                                <img width="50" height="50" class="avatar" src="images/avatars/user-01.jpg" alt="">
-                            </div>
-
-                            <div class="comment__content">
-
-                                <div class="comment__info">
-                                    <cite>{{ comment.author }}</cite>
-
-                                    <div class="comment__meta">
-                                        <time class="comment__time">{{ comment.date_format }}</time>
-                                        <!-- <a class="reply" href="#0">Reply</a> -->
-                                    </div>
-                                </div>
-
-                                <div class="comment__text">
-                                <p>{{ comment.comment }}</p>
-                                </div>
-
-                            </div>
-
-                    {% endfor %}
-
-                    </ol> <!-- end commentlist -->
-
+{% load crispy_forms_tags %}
 
                     <!-- respond
                     ================================================== -->
@@ -45,34 +6,14 @@
 
                         <h3 class="h2">Add Comment</h3>
 
-                        <form name="contactForm" id="contactForm" method="post" action="">
-                            <fieldset>
-
-                                <div class="form-field">
-                                        <input name="cName" type="text" id="cName" class="full-width" placeholder="Your Name" value="">
-                                </div>
-
-                                <div class="form-field">
-                                        <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="">
-                                </div>
-
-                                <div class="form-field">
-                                        <input name="cWebsite" type="text" id="cWebsite" class="full-width" placeholder="Website" value="">
-                                </div>
-
-                                <div class="message form-field">
-                                    <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message"></textarea>
-                                </div>
-
-                                <button type="submit" class="submit btn--primary btn--large full-width">Submit</button>
-
+                        <fieldset>
+                            <form action = "{% url 'add_comment' article.pk%}" name="contactForm" id="contactForm" method="post" action="">
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <button class ="btn btn-success" type="submit">Edit Up</button>
                             </fieldset>
                         </form> <!-- end form -->
 
                     </div> <!-- end respond -->
 
-                </div> <!-- end col-full -->
-
-            </div> <!-- end row comments -->
-        </div> 
-        <!-- end comments-wrap -->

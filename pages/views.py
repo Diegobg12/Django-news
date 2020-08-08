@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import FormView
 from articles.models import *
 from django.shortcuts import get_object_or_404
 from itertools import chain
 from taggit.models import Tag
 from users.models import *
 from django.template import RequestContext
-
-
+from .forms import *
+from django.urls import reverse_lazy
+from django.core.mail import send_mail
+from django.views.defaults import page_not_found
 
 # Create your views here.
 
@@ -28,8 +31,21 @@ class HomePageView(TemplateView):
 class AboutView(TemplateView):
     template_name = 'about.html'
 
-class ContactView(TemplateView):
+class ContactView(FormView):
     template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('contact')
+
+    # send_mail(ContactForm.send_info(self), 
+    # 'message', 
+    # 'bygreenxsas@gmail.com', 
+    # ['bygreenxsas@gmail.com'], fail_silently=False)
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super().form_valid(form)
 
 
 class SearchResultsView(ListView):
@@ -110,10 +126,10 @@ class AuthorView(ListView):
         return context
 
 
-def not_found_view(request, *args, **argv):
-    response = render('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
+def error_404(request, exception):
+        data = {}
+        return render(request,'404.html', data)
 
-
+def error_500(request):
+        data = {}
+        return render(request,'500.html', data)
