@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from .forms import *
 from django.views.generic.edit import FormMixin
 
+
 # Create your views here.
 
 class ArticleListView(ListView):
