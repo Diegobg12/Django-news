@@ -1,7 +1,7 @@
 {% extends 'base-new.html' %}
 
+{% load static %}
 {% block title %} CONTACT {% endblock title %}
-
 {% block content %}
 
     <!-- s-content
@@ -15,18 +15,18 @@
                     Feel Free To Contact Us.
                 </h1>
             </div> <!-- end s-content__header -->
-    
+<!--     
             <div class="s-content__media col-full">
                 <div id="map-wrap">
-                    <div id="map-container"></div>
-                    <div id="map-zoom-in"></div>
-                    <div id="map-zoom-out"></div>
+                    <div class="s-content__post-thumb">                    
+                        <img src="{% static 'images/thumbs/about/contact.jpg' %}" alt="https://unsplash.com/@xaviercoiffic" >
+                        <p>Photo by <a href="https://unsplash.com/@xaviercoiffic" target="_blank">@xaviercoiffic</a></p>
+                    </div>
                 </div> 
-            </div> <!-- end s-content__media -->
+            </div> -->
+             <!-- end s-content__media -->
 
             <div class="col-full s-content__main">
-
-                <p class="lead">You are soo welcome to contribute to this website. </p>
                 
                 <p>If you are interested in publish please contact first and you will get the basic template
                     post so you can share your ideas in a beutifull way and keep the styling of this page.
@@ -54,21 +54,16 @@
 
                 <h3>Say Hello.</h3>
 
-                <form name="cForm" id="cForm" method="post" action="">
                     <fieldset>
-
                         <div class="form-field">
-                            <form method="post">
+                            <form method="POST">
                                 {% csrf_token %}
                                 {{ form.as_p }}
-
+                                <button type="submit" class="submit btn btn--primary full-width">Submit</button>
                             </form>
                         </div>
-
-                        <button type="submit" class="submit btn btn--primary full-width">Submit</button>
-
+                        
                     </fieldset>
-                </form>  
                 <!-- end form -->
 
 
@@ -80,3 +75,5 @@
 
 
 {% endblock %}
+
+
