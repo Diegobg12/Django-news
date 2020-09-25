@@ -20,7 +20,7 @@
 
                         <div class="entry__info">
                             <a href="{% url 'article_detail' lastPost.pk  %}" class="entry__profile-pic">
-                                <img class="avatar" src= '{{ lastPost.avatar.url }}' alt="">
+                                <img class="avatar" src= '{{ lastPost.author.avatar.url }}' alt="">
                             </a>
 
                             <ul class="entry__meta">
@@ -44,7 +44,7 @@
 
                         <div class="entry__info">
                             <a href="{% url 'article_author' post.author.pk %}" class="entry__profile-pic">
-                                <img class="avatar" src="{{ post.avatar.url }}" alt="">
+                                <img class="avatar" src="{{ post.author.avatar.url }}" alt="">
                             </a>
 
                             <ul class="entry__meta">

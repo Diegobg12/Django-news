@@ -142,12 +142,32 @@
                                 </div>
 
                             </div>
-
+                            {% empty %}
+                             <p>Don't be shy! be the first to comment! ✌🏼</p>
+                             {% if not user.is_authenticated %}
+                             <p>
+                                Do you want to leave yout thougts? Sign up first! 
+                                👉🏼 <a href="{% url 'signup' %}">Sign Up</a> <br>
+                                Already here? please <a href="{% url 'login' %}">Log In</a>
+                            </p>
+                            {% endif %}
                     {% endfor %}
 
                     </ol> <!-- end commentlist -->
 
-                    {% include "coments.html" %}
+                    <div class="respond">
+                        {% if user.is_authenticated %}
+                        <h3 class="h2">Add Comment</h3>
+                            <fieldset>
+                                <form action = "{% url 'add_comment' article.pk%}" name="contactForm" id="contactForm" method="post" action="">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <button class ="btn btn-success" type="submit">Comment</button>
+                                </form> <!-- end form -->
+                            </fieldset>
+                        {% endif %}
+                    </div> <!-- end respond -->
+
 
                 </div> <!-- end col-full -->
 
