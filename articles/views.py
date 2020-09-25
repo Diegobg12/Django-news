@@ -63,24 +63,15 @@ class AddCommentView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         comment=form.save(commit=False)
         comment.article=get_object_or_404(Article, pk=self.kwargs['pk'])
+        comment.author = self.request.user
+        comment=form.save(commit=False)
         comment.save()
-        super().form_valid(form)
+        return super().form_valid(form)
         
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
-        
-# @login_required
-# def add_comment_to_post(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-#     if request.method == "POST":
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.author
-#             comment.comment = post
-#             comment.save()
-#             return redirect('article_detail', pk=post.pk)
-#     else:
-#         form = CommentForm()
-#     return render(request, 'add_comment_to_post.html', {'form': form})
+    
+    def get_success_url(self):
+        articleid = self.kwargs['pk']
+        return reverse_lazy('article_detail', kwargs={'pk': articleid})
