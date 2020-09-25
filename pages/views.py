@@ -11,6 +11,13 @@ from .forms import *
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.views.defaults import page_not_found
+import http.client
+import json
+from environs import Env
+env = Env()
+env.read_env()
+
+SENDGRID_API_KEY = env("EMAIL_SENDER_API")
 
 # Create your views here.
 
@@ -126,3 +133,21 @@ def error_404(request, exception):
 def error_500(request):
         data = {}
         return render(request,'500.html', data)
+
+def subscriber_add(request):
+    if request.method == 'POST':
+        try:
+            conn = http.client.HTTPSConnection("api.sendgrid.com")
+            email = request.POST.get('subscriber-email')
+            payload = json.dumps({"contacts": [{"email": email}]})
+            headers = {
+                'authorization': "Bearer %s" % SENDGRID_API_KEY,
+                'content-type': "application/json"
+            }
+            conn.request("PUT", "/v3/marketing/contacts", payload, headers)
+            res = conn.getresponse()
+            data = res.read()
+            print(data.decode("utf-8"))
+        except Exception as e:
+            print(e.message)
+    return redirect('/')
