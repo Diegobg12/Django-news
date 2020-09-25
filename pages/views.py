@@ -36,17 +36,12 @@ class ContactView(FormView):
     form_class = ContactForm
     success_url = reverse_lazy('contact')
 
-    # send_mail(ContactForm.send_info(self), 
-    # 'message', 
-    # 'bygreenxsas@gmail.com', 
-    # ['bygreenxsas@gmail.com'], fail_silently=False)
-
-    # def form_valid(self, form):
-    #     # This method is called when valid form data has been POSTed.
-    #     # It should return an HttpResponse.
-    #     form.send_email()
-    #     return super().form_valid(form)
-
+    def form_valid(self, form):
+        subject = f'You received a mesage from {form.cleaned_data["name"]}'
+        message = f'{form.cleaned_data["message"]} CONTACT TO THE EMAIL {form.cleaned_data["from_email"]}'
+        recepients = ['bygreenxsas@gmail.com']
+        send_mail(subject, message, 'bygreenxsas@gmail.com', recepients, fail_silently=True)
+        return super().form_valid(form)
 
 class SearchResultsView(ListView):
     model = Article
@@ -91,8 +86,6 @@ class CategoryView(ListView):
         context['category'] = self.category
         context['post_list'] = post_list
         return context
-
-
 
 class TagView(ListView):
     model = Article

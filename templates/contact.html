@@ -30,7 +30,8 @@
                 
                 <p>If you are interested in publish please contact first and you will get the basic template
                     post so you can share your ideas in a beutifull way and keep the styling of this page.
-                    As you may gess this site was made using a cool Bootstrap template.
+                    This web site was made using a cool Bootstrap template from Site Template by
+                    <a href="https://colorlib.com/">Colorlib.</a>
                 </p>
 
                 <div class="row">
@@ -58,6 +59,9 @@
                         <div class="form-field">
                             <form method="POST">
                                 {% csrf_token %}
+                                {% for hidden in form.hidden.fields %}
+                                    {{ hidden }}
+                                {% endfor %}
                                 {{ form.as_p }}
                                 <button type="submit" class="submit btn btn--primary full-width">Submit</button>
                             </form>
