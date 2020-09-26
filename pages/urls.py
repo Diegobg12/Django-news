@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 from articles.views import *
+from django.conf.urls.static import static
+
 
 
 
@@ -14,4 +16,3 @@ urlpatterns = [
     path('<int:pk>/author/', AuthorView.as_view(), name = 'article_author'),
     path('<int:pk>/tag/', TagView.as_view(), name = 'tag'),
 ]
-

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     # 3rd party
     'taggit',
+    'debug_toolbar',
 ]
 
 TIME_ZONE = 'America/Vancouver'
@@ -63,7 +64,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware'
 ]
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECCONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'newspaper_project.urls'
 
@@ -153,6 +159,11 @@ EMAIL_HOST_PASSWORD = env("EMAIL_SENDER_API")
 EMAIL_PORT = 587
 EMAIL_USE_TLS= True
 
+
+# django-debug-toolbar
+import socket
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
 # Allow Tags
 

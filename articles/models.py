@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.conf import settings
 from datetime import datetime
 from taggit.managers import TaggableManager
+import uuid
 
 # Create your models here.
 
@@ -38,7 +39,6 @@ class Article(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
     )
-
     def __str__(self):
         return self.title
     
@@ -68,7 +68,7 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return reverse('article_list')
     def date_format(self):
-        return self.date.strftime('%b %e %Y & %H ')
+        return self.date.strftime('%b %e %Y ')
 
 
 # class Replay(models.Model):
