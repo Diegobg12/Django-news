@@ -9,3 +9,4 @@ db.sqlite3-journal
 media
 philosophy-colorlib
 docker-compose.yml
+docker-compose-prod.yml
