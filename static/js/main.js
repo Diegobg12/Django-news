@@ -603,8 +603,22 @@
         } 
 
     };
+    // ----- SHARE LINKS
+    var clshareLinks= function() {
+        var pxShow      = 10000,
+            shareLinks = $(".shareList")
 
+        // Show or hide the button
+        if ($(window).scrollTop() < pxShow) shareLinks.addClass('display-links');
 
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() < pxShow) {
+                if(!shareLinks.hasClass('display-links')) shareLinks.addClass('display-links')
+            } else {
+                shareLinks.removeClass('display-links')
+            }
+        });
+    };
    /* Initialize
     * ------------------------------------------------------ */
     (function ssInit() {
@@ -623,7 +637,7 @@
         clAjaxChimp();
         clBackToTop();
         clGoogleMap();
-
+        clshareLinks();
     })();
         
 })(jQuery);

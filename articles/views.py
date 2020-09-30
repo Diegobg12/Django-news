@@ -9,6 +9,10 @@ from django.shortcuts import get_object_or_404
 from .forms import *
 from django.views.generic.edit import FormMixin
 
+class AdminStaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+    login_url = "/contact/"
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user.is_staff
 
 # Create your views here.
 
@@ -23,7 +27,7 @@ class ArticleDetailLView(FormMixin, DetailView):
     form_class = CommentForm
  
 
-class ArticleUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+class ArticleUpdateView(AdminStaffRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Article
     template_name = 'article_edit.html'
     login_url = 'login'
@@ -34,7 +38,7 @@ class ArticleUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
         return obj.author == self.request.user
 
 
-class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class ArticleDeleteView(AdminStaffRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
     template_name = 'article_delete.html'
     success_url = reverse_lazy('home')
@@ -45,7 +49,7 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return obj.author == self.request.user
 
 
-class ArticleCreateView(LoginRequiredMixin, CreateView):
+class ArticleCreateView(AdminStaffRequiredMixin, CreateView):
     model = Article
     template_name = 'article_new.html'
     login_url = 'login'

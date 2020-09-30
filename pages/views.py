@@ -151,3 +151,7 @@ def subscriber_add(request):
         except Exception as e:
             print(e.message)
     return redirect('/')
+
+def permission_denied(request, exception):
+    context = {}
+    return render(request, 'contact.html', context, status=403)

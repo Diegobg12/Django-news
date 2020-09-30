@@ -46,9 +46,16 @@
             <div class="col-full s-content__main">
                 {{  article.body|safe }}
             </div> <!-- end s-content__main -->
-
+            <ul class="s-content__tags shareList">
+                <!-- <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a> -->
+                    {% with base_url="https://deigobustosdev.com/g-news" %} 
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ article.get_absolute_url }}/&title={{ article.title }}&summary={{ article.body_into }}&source={{ article.get_absolute_url }}/" add target="_blank"><i class="fa fa-linkedin" style="color: black; font-size: 30px;" aria-hidden="true"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><i class="fa fa-facebook" style="color: black; font-size: 30px;" add target="_blank" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/home?status=I'm%20going%20to%20learn%20to%20Code...%20Come%20build%20an%20web%20apsp%20with%20me!%20%23CFE%20and%20@justinmitchel%20http://codingforentrepreneurs.com/" add target="_blank"><i class="fa fa-twitter" style="color: black; font-size: 30px;" aria-hidden="true"></i></a>
+                        <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}/&title=Unlock%20to%20Learn%20Swift%20for%20Free!%20By%20Swift%20for%20Entrepreneurs.%20Made%20for%20Non%20Techincals." add target="_blank"><i class="fa fa-reddit" style="color: black; font-size: 30px;" aria-hidden="true"></i></a>
+                    {% endwith %}                        
+            </ul> <!-- end header__social -->
             <div>
-
                 <p class="s-content__tags">
                     <span>Post Tags</span>
                     <span class="s-content__tag-list">
@@ -56,18 +63,7 @@
                         <a href="{% url 'tag' tag.pk %}">{{tag}}</a>
                         {% endfor %}
                     </span>
-                </p> <!-- end s-content__tags -->
-                
-                <ul class="s-content__tags">
-                    <!-- <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a> -->
-                        <span>Share </span>
-                        {% with base_url="https://deigobustosdev.com/g-news" %} 
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ article.get_absolute_url }}/&title={{ article.title }}&summary={{ article.body_into }}&source={{ article.get_absolute_url }}/" add target="_blank"><i class="fa fa-linkedin" style="color: black; font-size: 30px;" aria-hidden="true"></i></a>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><i class="fa fa-facebook" style="color: black; font-size: 30px;" add target="_blank" aria-hidden="true"></i></a>
-                            <a href="https://twitter.com/home?status=I'm%20going%20to%20learn%20to%20Code...%20Come%20build%20an%20web%20apsp%20with%20me!%20%23CFE%20and%20@justinmitchel%20http://codingforentrepreneurs.com/" add target="_blank"><i class="fa fa-twitter" style="color: black; font-size: 30px;" aria-hidden="true"></i></a>
-                            <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}/&title=Unlock%20to%20Learn%20Swift%20for%20Free!%20By%20Swift%20for%20Entrepreneurs.%20Made%20for%20Non%20Techincals." add target="_blank"><i class="fa fa-reddit" style="color: black; font-size: 30px;" aria-hidden="true"></i></a>
-                        {% endwith %}                        
-                </ul> <!-- end header__social -->
+                </p> <!-- end s-content__tags -->                
                 
                 <div class="s-content__author">
                     <img src="{{ article.author.avatar.url }}" alt="">

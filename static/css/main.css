@@ -4224,3 +4224,30 @@ footer h4::after {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+@media only screen and (min-width:850px){
+   .shareList{
+      display: flex;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s linear 300ms, opacity 300ms;
+      flex-direction: column;
+      position: fixed;
+      left: 40px;
+      width: fit-content;
+   }
+   
+   .display-links{
+      visibility: visible;
+      position: fixed;
+      left: 40px;
+      opacity: 1;
+      transition: visibility 0s linear 0s, opacity 300ms;
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+   }
+}
+    .shareList a i:hover{
+         color: #0054a5!important;
+      } 
