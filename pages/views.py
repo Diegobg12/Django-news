@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import FormView
 from articles.models import *
@@ -154,4 +155,4 @@ def subscriber_add(request):
 
 def permission_denied(request, exception):
     context = {}
-    return render(request, 'contact.html', context, status=403)
+    return HttpResponseRedirect(reverse_lazy('contact'))
